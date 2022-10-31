@@ -1,0 +1,120 @@
+    {
+      id: 1,
+      name: 'Golden State Warriors'
+    },
+    {
+      id: 2,
+      name: 'Los Angeles Lakers'
+    },
+    {
+      id: 5,
+      name: 'Philadelphia 76ers'
+    },
+    {
+      id: 7,
+      name: 'Boston Celtics'
+    },
+    {
+      id: 12,
+      name: 'Brooklyn Nets'
+    },
+    {
+      id: 13,
+      name: 'LA Clippers'
+    },
+    {
+      id: 14,
+      name: 'New York Knicks'
+    },
+    {
+      id: 15,
+      name: 'Phoenix Suns'
+    },
+    {
+      id: 16,
+      name: 'Toronto Raptors'
+    },
+    {
+      id: 17,
+      name: 'Sacramento Kings'
+    },
+    {
+      id: 18,
+      name: 'Chicago Bulls'
+    },
+    {
+      id: 19,
+      name: 'Atlanta Hawks'
+    },
+    {
+      id: 20,
+      name: 'Cleveland Cavaliers'
+    },
+    {
+      id: 21,
+      name: 'Charlotte Hornets'
+    },
+    {
+      id: 22,
+      name: 'Detroit Pistons'
+    },
+    {
+      id: 23,
+      name: 'Miami Heat'
+    },
+    {
+      id: 24,
+      name: 'Indiana Pacers'
+    },
+    {
+      id: 25,
+      name: 'Orlando Magic'
+    },
+    {
+      id: 26,
+      name: 'Milwaukee Bucks'
+    },
+    {
+      id: 27,
+      name: 'Washington Wizards'
+    },
+    {
+      id: 28,
+      name: 'Denver Nuggets'
+    },
+    {
+      id: 29,
+      name: 'Dallas Mavericks'
+    },
+    {
+      id: 30,
+      name: 'Minnesota Timberwolves'
+    },
+    {
+      id: 31,
+      name: 'Houston Rockets'
+    },
+    {
+      id: 32,
+      name: 'Oklahoma City Thunder'
+    },
+    {
+      id: 33,
+      name: 'Memphis Grizzlies'
+    },
+    {
+      id: 34,
+      name: 'Portland Trail Blazers'
+    },
+    {
+      id: 35,
+      name: 'New Orleans Pelicans'
+    },
+    {
+      id: 36,
+      name: 'Utah Jazz'
+    },
+    {
+      id: 37,
+      name: 'San Antonio Spurs'
+    }
