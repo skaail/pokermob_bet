@@ -2,7 +2,7 @@ var cron = require('node-cron');
 var mysql = require('mysql');
 const axios = require('axios')
 
-const apiKey = '57c559f5a638226bc939537952fd7f97'
+const apiKey = '91c7146403c1d00c68201b0d5572c322'
 const sportKey = 'upcoming'
 const regions = 'us' 
 const markets = 'h2h'

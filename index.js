@@ -3,7 +3,7 @@ const { format } = require('mysql')
 
 // An api key is emailed to you when you sign up to a plan
 // Get a free API key at https://api.the-odds-api.com/
-const apiKey = '57c559f5a638226bc939537952fd7f97'
+const apiKey = '91c7146403c1d00c68201b0d5572c322'
 
 const sportKey = 'basketball_nba' // use the sport_key from the /sports endpoint below, or use 'upcoming' to see the next 8 games across all sports
 
