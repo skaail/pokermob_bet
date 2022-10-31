@@ -207,6 +207,6 @@ function get_nba_matches(){
 
 cron.schedule('15 18 * * *', () => {get_nba_matches()})
 
-server.listen(process.env.PORT,  function() {
+server.listen(process.env.PORT || 3000,  function() {
     console.log("Server started.......");
   })
