@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 const axios = require('axios')
 var cron = require('node-cron');
+const http = require('http');
 
 const apiKey = '91c7146403c1d00c68201b0d5572c322'
 const sportKey = 'upcoming'
@@ -8,6 +9,12 @@ const regions = 'us'
 const markets = 'h2h'
 const oddsFormat = 'decimal'
 const dateFormat = 'iso' 
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World');
+  });
 
 var con = mysql.createConnection({
     host: "162.214.49.127",
@@ -198,4 +205,8 @@ function get_nba_matches(){
 }
 
 
-cron.schedule('01 18 * * *', () => {get_nba_matches()})
+cron.schedule('15 18 * * *', () => {get_nba_matches()})
+
+server.listen(process.env.PORT,  function() {
+    console.log("Server started.......");
+  })
