@@ -198,4 +198,4 @@ function get_nba_matches(){
 }
 
 
-cron.schedule('0 1 * * *', () => {get_nba_matches()})
+cron.schedule('01 18 * * *', () => {get_nba_matches()})
