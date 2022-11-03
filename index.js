@@ -295,6 +295,7 @@ function get_seriaa_matches(){
                   })
               }else{
                   updateOdds(result[0].id,odd_time_1,odd_time_2)
+                  console.log('partida existente')
               }
           })
       select.end()
@@ -377,5 +378,7 @@ function get_seriaa_matches(){
 }
 
 console.log('loaded')
-cron.schedule('0 1 * * *', () => {get_nba_matches()})
-cron.schedule('1 1 * * *', () => {get_seriaa_matches()})
+cron.schedule('0 1 * * *', () => {
+  get_nba_matches()
+  get_seriaa_matches()
+})
