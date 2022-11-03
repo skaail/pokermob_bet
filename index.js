@@ -254,6 +254,7 @@ function get_seriaa_matches(){
       for(let i = 0; i < response.data.length; i++){
         team1_id = teamsBrasileiro.find(item => item.name === response.data[i].home_team)
         team2_id = teamsBrasileiro.find(item => item.name === response.data[i].away_team)
+        id = response.data[i].id
         let start_date = response.data[i].commence_time
 
         let date = new Date(start_date)
@@ -264,8 +265,6 @@ function get_seriaa_matches(){
         date.setHours(-3,0,0,0)
         tomorrow.setHours(-3,0,0,0)
         date_certo = date_certo.toString().split('G')[0]
-  
-        console.log(tomorrow.toISOString())
 
         let odd_time_1 = response.data[i].bookmakers[0].markets[0].outcomes[0].price
         let odd_time_2 = response.data[i].bookmakers[0].markets[0].outcomes[1].price
@@ -345,7 +344,7 @@ function get_seriaa_matches(){
           database: "pokermob_bet"
         });
   
-        var sql = "INSERT INTO game_matches (id, category_id, tournament_id, team1_id, team2_id, name, start_date, end_date, status, is_unlock) VALUES (id, 1, 16, "+ team1_id.id +", "+ team2_id.id +", '"+ team1_id.name +" VS "+ team2_id.name +" / "+ date_certo +"', '"+ date.toISOString() +"', '"+ tomorrow.toISOString() +"', 1, 0)";
+        var sql = "INSERT INTO game_matches (id, category_id, tournament_id, team1_id, team2_id, name, start_date, end_date, status, is_unlock) VALUES (id, 2, 16, "+ team1_id.id +", "+ team2_id.id +", '"+ team1_id.name +" VS "+ team2_id.name +" / "+ date_certo +"', '"+ date.toISOString() +"', '"+ tomorrow.toISOString() +"', 1, 0)";
   
           await insert.query(sql, async function (err, result) {
               if (err) throw err;
