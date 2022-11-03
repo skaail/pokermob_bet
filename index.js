@@ -377,5 +377,5 @@ function get_seriaa_matches(){
 }
 
 console.log('loaded')
-cron.schedule('*/5 * * * *', () => {get_nba_matches()})
-cron.schedule('*/5 * * * *', () => {get_seriaa_matches()})
+cron.schedule('0 1 * * *', () => {get_nba_matches()})
+cron.schedule('1 1 * * *', () => {get_seriaa_matches()})
