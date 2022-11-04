@@ -107,7 +107,7 @@ function get_nba_matches(){
           date = new Date(start_date)
           date_certo = new Date(start_date)
           tomorrow = new Date();
-          date_certo.setTime(date_certo.getTime() - 10*60000)
+          date_certo.setTime(date_certo.getTime())
           tomorrow.setDate(date.getDate()+1)
           date.setHours(-3,0,0,0)
           tomorrow.setHours(-3,0,0,0)
