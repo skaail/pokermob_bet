@@ -10,11 +10,7 @@ const markets = 'h2h'
 const oddsFormat = 'decimal'
 const dateFormat = 'iso' 
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
-  });
+let horarios = []
 
 var con = mysql.createConnection({
     host: "162.214.49.127",
@@ -196,7 +192,8 @@ function get_nba_matches(){
           });
     
           var sql = "INSERT INTO game_matches (id, category_id, tournament_id, team1_id, team2_id, name, start_date, end_date, status, is_unlock) VALUES (id, 1, 2, "+ team1_id.id +", "+ team2_id.id +", '"+ team1_id.name +" VS "+ team2_id.name +" / "+ date_certo +"', '"+ date.toISOString() +"', '"+ tomorrow.toISOString() +"', 1, 0)";
-    
+          horarios.push(date_certo)
+
             await insert.query(sql, async function (err, result) {
                 if (err) throw err;
                 let match_id = result.insertId;
@@ -377,8 +374,72 @@ function get_seriaa_matches(){
 
 }
 
+function get_nba_results(){
+  axios.get('https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom=1', {
+    params: {
+        apiKey,
+        regions,
+        markets,
+        oddsFormat,
+        dateFormat,
+    }
+})
+.then(response => {
+  con.connect(function(err) { 
+    api_result = response.data
+    if (err) throw err;
+    console.log("Connected!");
+    for(let i = 0; i < api_result.length; i++) {
+
+        try {
+            team1 = api_result[i].scores[0].name
+            team2 = api_result[i].scores[1].name
+
+            team1_points = parseInt(api_result[i].scores[0].score)
+            team2_points = parseInt(api_result[i].scores[1].score)
+
+            if (err) throw err;
+
+            if(team1_points > team2_points){
+                var sql = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+            }else{
+                var sql = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+            }
+            
+            con.query(sql, function (err, result) {
+              if (err) throw err;
+              console.log(result.affectedRows + " record(s) updated");
+            });
+
+        } catch (error) {
+            console.log('a partida não terminou')
+        }
+    }
+    
+  });
+
+})
+}
+
 console.log('loaded')
 cron.schedule('0 1 * * *', () => {
+  horarios = []
   get_nba_matches()
   get_seriaa_matches()
 })
+
+
+for(let i = 0; i < horarios.length; i++){
+  cront = horarios[i].split(' ')
+  day_week = cront[0]
+  month = cront[1]
+  day = cront[2]
+  time = cront[4].split(':')
+  hour = time[0]
+  minute = time[1]
+
+  cron.schedule(''+minute+' '+hour+' '+day+' '+month+' '+day_week+'' , () => {
+    get_nba_results()
+  })
+
+}
