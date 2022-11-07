@@ -422,7 +422,7 @@ function get_nba_results(){
 }
 
 console.log('loaded')
-cron.schedule('0 1 * * *', () => {
+cron.schedule('* * * * * *', () => {
   horarios = []
   get_nba_matches()
   get_seriaa_matches()
