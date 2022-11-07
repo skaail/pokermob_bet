@@ -1,9 +1,14 @@
 var mysql = require('mysql');
 const axios = require('axios')
 var cron = require('node-cron');
-const http = require('http');
 
-const apiKey = '91c7146403c1d00c68201b0d5572c322'
+const express = require('express')
+const app = express()
+const port = 3000
+
+
+
+const apiKey = '697769dd74e45fcf08683cdd04299d8e'
 const sportKey = 'upcoming'
 const regions = 'us' 
 const markets = 'h2h'
@@ -421,8 +426,10 @@ function get_nba_results(){
 })
 }
 
-console.log('loaded')
-cron.schedule('* * * * * *', () => {
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`loaded`)
+})
+cron.schedule('0 1 * * * *', () => {
   horarios = []
   get_nba_matches()
   get_seriaa_matches()
