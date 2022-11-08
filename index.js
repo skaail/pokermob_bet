@@ -407,11 +407,18 @@ function get_nba_results(){
 
             if(team1_points > team2_points){
                 var sql = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+                var sql2 = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
             }else{
                 var sql = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+                var sql2 = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
             }
             
             con.query(sql, function (err, result) {
+              if (err) throw err;
+              console.log(result.affectedRows + " record(s) updated");
+            });
+
+            con.query(sql2, function (err, result) {
               if (err) throw err;
               console.log(result.affectedRows + " record(s) updated");
             });
@@ -450,3 +457,4 @@ for(let i = 0; i < horarios.length; i++){
   })
 
 }
+
