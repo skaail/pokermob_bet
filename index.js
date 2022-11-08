@@ -417,8 +417,8 @@ function get_nba_results(){
               if (err) throw err;
               console.log(result.affectedRows + " record(s) updated");
             });
-
-            con.query(sql2, function (err, result) {
+            
+            con.query(sql, function (err, result) {
               if (err) throw err;
               console.log(result.affectedRows + " record(s) updated");
             });
