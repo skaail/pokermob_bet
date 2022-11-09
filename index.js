@@ -436,26 +436,12 @@ function get_nba_results(){
 app.listen(process.env.PORT || 5000, () => {
   console.log(`loaded`)
   cron.schedule('0 1 * * *', () => {
-    horarios = []
+
+    get_nba_results()
     get_nba_matches()
     get_seriaa_matches()
+
   })
 })
 
-
-
-for(let i = 0; i < horarios.length; i++){
-  cront = horarios[i].split(' ')
-  day_week = cront[0]
-  month = cront[1]
-  day = cront[2]
-  time = cront[4].split(':')
-  hour = time[0]
-  minute = time[1]
-
-  cron.schedule(''+minute+' '+hour+' '+day+' '+month+' '+day_week+'' , () => {
-    get_nba_results()
-  })
-
-}
 
