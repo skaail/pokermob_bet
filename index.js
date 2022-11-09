@@ -380,7 +380,7 @@ function get_seriaa_matches(){
 }
 
 function get_nba_results(){
-  axios.get('https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom=1', {
+  axios.get('https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom=3', {
     params: {
         apiKey,
         regions,
@@ -435,7 +435,7 @@ function get_nba_results(){
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`loaded`)
-  cron.schedule('0 1 * * *', () => {
+  cron.schedule('*/1 * * * *', () => {
 
     get_nba_results()
     get_nba_matches()
