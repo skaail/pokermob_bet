@@ -379,6 +379,60 @@ function get_seriaa_matches(){
 
 }
 
+function get_seriaa_results(){
+  axios.get('https://api.the-odds-api.com/v4/sports/soccer_brazil_campeonato/scores/?daysFrom=3', {
+    params: {
+        apiKey,
+        regions,
+        markets,
+        oddsFormat,
+        dateFormat,
+    }
+})
+.then(response => {
+  con.connect(function(err) { 
+    api_result = response.data
+    if (err) throw err;
+    console.log("Connected!");
+    for(let i = 0; i < api_result.length; i++) {
+
+        try {
+            team1 = api_result[i].scores[0].name
+            team2 = api_result[i].scores[1].name
+
+            team1_points = parseInt(api_result[i].scores[0].score)
+            team2_points = parseInt(api_result[i].scores[1].score)
+
+            if (err) throw err;
+
+            if(team1_points > team2_points){
+                var sql = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+                var sql2 = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+            }else{
+                var sql = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+                var sql2 = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+            }
+            
+            con.query(sql, function (err, result) {
+              if (err) throw err;
+              console.log(result.affectedRows + " record(s) updated");
+            });
+            
+            con.query(sql, function (err, result) {
+              if (err) throw err;
+              console.log(result.affectedRows + " record(s) updated");
+            });
+
+        } catch (error) {
+            console.log('a partida não terminou')
+        }
+    }
+    
+  });
+
+})
+}
+
 function get_nba_results(){
   axios.get('https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom=2', {
     params: {
@@ -435,9 +489,11 @@ function get_nba_results(){
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`loaded`)
+  
   cron.schedule('0 1 * * *', () => {
 
     get_nba_results()
+    get_seriaa_results()
     get_nba_matches()
     get_seriaa_matches()
 
