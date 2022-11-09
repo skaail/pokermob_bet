@@ -17,12 +17,6 @@ const dateFormat = 'iso'
 
 let horarios = []
 
-var con = mysql.createConnection({
-    host: "162.214.49.127",
-    user: "pokermob_better",
-    password: "Admlock22#",
-    database: "pokermob_bet"
-});
 
 var teamsNBA = [
   {id: 1, name: 'Golden State Warriors'},
@@ -390,6 +384,14 @@ function get_seriaa_results(){
     }
 })
 .then(response => {
+  
+var con = mysql.createConnection({
+  host: "162.214.49.127",
+  user: "pokermob_better",
+  password: "Admlock22#",
+  database: "pokermob_bet"
+});
+
   con.connect(function(err) { 
     api_result = response.data
     if (err) throw err;
@@ -444,6 +446,14 @@ function get_nba_results(){
     }
 })
 .then(response => {
+  
+var con = mysql.createConnection({
+  host: "162.214.49.127",
+  user: "pokermob_better",
+  password: "Admlock22#",
+  database: "pokermob_bet"
+});
+
   con.connect(function(err) { 
     api_result = response.data
     if (err) throw err;
