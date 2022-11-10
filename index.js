@@ -431,7 +431,7 @@ var con = mysql.createConnection({
     }
     
   });
-
+  con.end()
 })
 }
 
@@ -493,7 +493,7 @@ var con = mysql.createConnection({
     }
     
   });
-
+  con.end()
 })
 }
 
