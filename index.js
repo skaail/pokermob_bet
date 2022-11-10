@@ -384,59 +384,60 @@ function get_seriaa_results(){
     }
 })
 .then(response => {
-  
-var con = mysql.createConnection({
-  host: "162.214.49.127",
-  user: "pokermob_better",
-  password: "Admlock22#",
-  database: "pokermob_bet"
+
+  var con = mysql.createConnection({
+    host: "162.214.49.127",
+    user: "pokermob_better",
+    password: "Admlock22#",
+    database: "pokermob_bet"
 });
 
-  con.connect(function(err) { 
-    api_result = response.data
-    if (err) throw err;
-    console.log("Connected!");
-    for(let i = 0; i < api_result.length; i++) {
+con.connect(function(err) { 
+api_result = response.data
+if (err) throw err;
+console.log("Connected!");
 
-        try {
-            team1 = api_result[i].scores[0].name
-            team2 = api_result[i].scores[1].name
+for(let i = 0; i < api_result.length; i++) {
 
-            team1_points = parseInt(api_result[i].scores[0].score)
-            team2_points = parseInt(api_result[i].scores[1].score)
+  try {
+      team1 = api_result[i].scores[0].name
+      team2 = api_result[i].scores[1].name
 
-            if (err) throw err;
+      team1_points = parseInt(api_result[i].scores[0].score)
+      team2_points = parseInt(api_result[i].scores[1].score)
 
-            if(team1_points > team2_points){
-                var sql = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
-                var sql2 = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
-            }else{
-                var sql = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
-                var sql2 = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
-            }
-            
-            con.query(sql, function (err, result) {
-              if (err) throw err;
-              console.log(result.affectedRows + " record(s) updated");
-            });
-            
-            con.query(sql, function (err, result) {
-              if (err) throw err;
-              console.log(result.affectedRows + " record(s) updated");
-            });
+      if (err) throw err;
 
-        } catch (error) {
-            console.log('a partida não terminou')
-        }
-    }
-    
-  });
-  con.end()
+      if(team1_points > team2_points){
+          var sql = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+          var sql2 = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+      }else{
+          var sql = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+          var sql2 = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+      }
+      
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+      });
+
+      con.query(sql2, function (err, result) {
+        if (err) throw err;
+        console.log(result.affectedRows + " record(s) updated");
+      });
+
+  } catch (error) {
+      console.log('a partida não terminou')
+  }
+}
+});
+console.log('Ciclo terminado')
+con.end()
 })
 }
 
 function get_nba_results(){
-  axios.get('https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom=2', {
+  axios.get(`https://api.the-odds-api.com/v4/sports/basketball_nba/odds`, {
     params: {
         apiKey,
         regions,
@@ -446,53 +447,54 @@ function get_nba_results(){
     }
 })
 .then(response => {
-  
-var con = mysql.createConnection({
-  host: "162.214.49.127",
-  user: "pokermob_better",
-  password: "Admlock22#",
-  database: "pokermob_bet"
-});
+
+    var con = mysql.createConnection({
+        host: "162.214.49.127",
+        user: "pokermob_better",
+        password: "Admlock22#",
+        database: "pokermob_bet"
+    });
 
   con.connect(function(err) { 
     api_result = response.data
     if (err) throw err;
     console.log("Connected!");
+  
     for(let i = 0; i < api_result.length; i++) {
 
-        try {
-            team1 = api_result[i].scores[0].name
-            team2 = api_result[i].scores[1].name
+      try {
+          team1 = api_result[i].scores[0].name
+          team2 = api_result[i].scores[1].name
 
-            team1_points = parseInt(api_result[i].scores[0].score)
-            team2_points = parseInt(api_result[i].scores[1].score)
+          team1_points = parseInt(api_result[i].scores[0].score)
+          team2_points = parseInt(api_result[i].scores[1].score)
 
+          if (err) throw err;
+
+          if(team1_points > team2_points){
+              var sql = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+              var sql2 = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+          }else{
+              var sql = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
+              var sql2 = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
+          }
+          
+          con.query(sql, function (err, result) {
             if (err) throw err;
+            console.log(result.affectedRows + " record(s) updated");
+          });
 
-            if(team1_points > team2_points){
-                var sql = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
-                var sql2 = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
-            }else{
-                var sql = "UPDATE game_options SET status = -2 WHERE option_name = '" + team2 + "'";
-                var sql2 = "UPDATE game_options SET status = 2 WHERE option_name = '" + team1 + "'";
-            }
-            
-            con.query(sql, function (err, result) {
-              if (err) throw err;
-              console.log(result.affectedRows + " record(s) updated");
-            });
-            
-            con.query(sql, function (err, result) {
-              if (err) throw err;
-              console.log(result.affectedRows + " record(s) updated");
-            });
+          con.query(sql2, function (err, result) {
+            if (err) throw err;
+            console.log(result.affectedRows + " record(s) updated");
+          });
 
-        } catch (error) {
-            console.log('a partida não terminou')
-        }
-    }
-    
+      } catch (error) {
+          console.log('a partida não terminou')
+      }
+  }
   });
+  console.log('Ciclo terminado')
   con.end()
 })
 }
@@ -509,5 +511,4 @@ app.listen(process.env.PORT || 5000, () => {
     get_seriaa_matches()
   })
 })
-
 
