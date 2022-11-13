@@ -501,11 +501,11 @@ function get_nba_results(){
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`loaded`)
+  cron.schedule('* * * * *', () => {
+    get_nba_results()
+    get_seriaa_results()
+    get_nba_matches()
+    get_seriaa_matches()
+  })
 })
 
-cron.schedule('* * * * *', () => {
-  get_nba_results()
-  get_seriaa_results()
-  get_nba_matches()
-  get_seriaa_matches()
-})
