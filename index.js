@@ -503,7 +503,7 @@ app.listen(process.env.PORT || 5000, () => {
   console.log(`loaded`)
 })
 
-cron.schedule('18 3 * * *', () => {
+cron.schedule('* * * * *', () => {
   get_nba_results()
   get_seriaa_results()
   get_nba_matches()
