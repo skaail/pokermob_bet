@@ -501,7 +501,7 @@ function get_nba_results(){
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`loaded`)
-  cron.schedule('* * * * *', () => {
+  cron.schedule('0 1 * * *', () => {
     get_nba_results()
     get_seriaa_results()
     get_nba_matches()
