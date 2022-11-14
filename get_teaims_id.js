@@ -35,7 +35,7 @@ var teams = [
     {id: 37, name: 'San Antonio Spurs'}
 ]
 
-const apiKey = '697769dd74e45fcf08683cdd04299d8e'
+const apiKey = '3bccb90224f97e4fe3de74573fe03f84'
 const sportKey = 'upcoming'
 const regions = 'us' 
 const markets = 'h2h'
