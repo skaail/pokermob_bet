@@ -1,8 +1,9 @@
 var mysql = require('mysql');
 var mysql = require('mysql');
 const axios = require('axios')
+require('dotenv').config();
 
-const apiKey = '3bccb90224f97e4fe3de74573fe03f84'
+const apiKey = process.env.apiKey
 const sportKey = 'upcoming'
 const regions = 'us' 
 const markets = 'h2h'
@@ -51,12 +52,12 @@ axios.get('https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFro
             
             con.query(sql, function (err, result) {
               if (err) throw err;
-              console.log(result.affectedRows + " record(s) updated");
+              console.log(result.affectedRows + " resultado cadastrado");
             });
 
             con.query(sql2, function (err, result) {
               if (err) throw err;
-              console.log(result.affectedRows + " record(s) updated");
+              console.log(result.affectedRows + " resultado cadastrado");
             });
 
         } catch (error) {

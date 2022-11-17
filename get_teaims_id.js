@@ -34,8 +34,9 @@ var teams = [
     {id: 36, name: 'Utah Jazz'},
     {id: 37, name: 'San Antonio Spurs'}
 ]
+require('dotenv').config();
 
-const apiKey = '3bccb90224f97e4fe3de74573fe03f84'
+const apiKey = process.env.apiKey
 const sportKey = 'upcoming'
 const regions = 'us' 
 const markets = 'h2h'
