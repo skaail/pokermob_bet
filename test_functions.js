@@ -1,8 +1,9 @@
 var mysql = require('mysql');
 const axios = require('axios')
 var cron = require('node-cron');
+require('dotenv').config();
 
-const apiKey = '3bccb90224f97e4fe3de74573fe03f84'
+const apiKey = process.env.apiKey
 const sportKey = 'upcoming'
 const regions = 'us' 
 const markets = 'h2h'
